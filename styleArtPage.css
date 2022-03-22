@@ -20,8 +20,8 @@
     #poly-settings{
         display: none;
         position: absolute;
-        top: 630px;;
-        left: 1000px;
+        top: 700px;;
+        left: 1020px;
     }
 
     #shape-menu{
@@ -59,6 +59,18 @@
         position: absolute;
         top: 630px;;
         left: 850px;
+    }
+
+    .shape-label-stroke{
+        position: absolute;
+        top: 630px;;
+        left: 1020px;
+    }
+
+    .shape-menu-stroke{
+        position: absolute;
+        top: 630px;;
+        left: 1140px;
     }
 
     .shape-label-circle-settings{

@@ -84,28 +84,25 @@ function addShape(shape){
     shape.dragAndDrop(dragOptions);
 }
 
-//gets the values from the hidden "input menus"
-function getVal(){
-    const val = document.querySelector('input').value;
-    return val;
-}
-
 //output shape to canvas based on shape selected in drop down meny & any aditional menu variables (like stroke & color)
 function outputShape(){
     let shapeColor = document.getElementById('color').value;
-    strokeVar = Number(getVal());
-    console.log(strokeVar);
+    let strokeVar = Number(document.getElementById('stroke').value);
+    let polySides = Number(document.getElementById('poly-sides').value);
+    console.log(polySides);
     
     switch(shape) {
         case "square":
             var square = spawnSquare(200, 200, 100);
             square.fill = shapeColor;
+            square.strokeWidth = strokeVar;
             addShape(square);
         break;
 
         case "circle":
             var circle = spawnCircle(500, 500, 100);
             circle.fill = shapeColor;
+            circle.strokeWidth = strokeVar;
             addShape(circle);
         break;
 
@@ -120,6 +117,8 @@ function outputShape(){
         case "polygon":
             var poly = spawnPoly(500, 500, 3, 100);
             poly.fill = shapeColor;
+            poly.strokeWidth = strokeVar;
+            poly.sides = polySides;
             addShape(poly);
         break;
 

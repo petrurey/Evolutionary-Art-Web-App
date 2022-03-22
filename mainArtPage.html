@@ -6,7 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <link rel="stylesheet" href="./styleArtPage.css" />
         <title>Canvas</title>
-        <script src="fractal_canvas.js"> </script>
+        <script src="fractalFuncionsTEST2.js"> </script>
         <script language="JavaScript" type="text/javascript" src="/Users/petrurey/Documents/JS_packages/jquery-3.6.0.js"></script>
         <script type="text/javascript" src="/Users/petrurey/Documents/JS_packages/ocanvas-2.10.0.js"></script>
         <script type="text/javascript" src="ocanvasInteractionObjects.js"> </script>
@@ -52,16 +52,19 @@
     <label for="shapeDropDown" class="shape-label-color">Shape fill color (hexadecimal):</label>
     <input type="text" name="color" id="color" class="shape-menu-color">
 
+    <label for="shapeDropDown" class="shape-label-stroke">Shape stroke (px):</label>
+    <input type="text" name="stroke" id="stroke" class="shape-menu-stroke">
+
     <!-- Hidden form for stroke settings (doesn't have to be hidden as all shapes have stroke) -->
-    <form id="line-settings">
+    <!-- <form id="line-settings">
         <label for="line-settings">Stroke width (px number): </label>
         <input type='text' class='text' name='line-settings' value size='20' oninput="getVal()"/>
-    </form>
+    </form> -->
 
     <!-- Hidden form for choosing the number of sides for polygons -->
     <form id="poly-settings">
         <label for="poly-settings">Number of sides: </label>
-        <input type='text' class='text' name='poly-settings' value size='20' oninput="getVal()"/>
+        <input type='text' class='text' name='poly-settings' id='poly-sides' value size='20'/>
     </form>
 
     <!-- Buttons -->
