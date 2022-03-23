@@ -67,10 +67,16 @@
         left: 1020px;
     }
 
-    .shape-menu-stroke{
+    .shape-menu-stroke-width{
         position: absolute;
-        top: 630px;;
+        top: 635px;;
         left: 1140px;
+    }
+
+    .shape-menu-stroke-color{
+        position: absolute;
+        top: 635px;;
+        left: 1300px;
     }
 
     .shape-label-circle-settings{

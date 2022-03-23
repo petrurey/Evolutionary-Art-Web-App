@@ -8,7 +8,7 @@ function spawnCircle(x, y, r){
         end: 360,
         fill: "#772014",
         pieSection: false,  //can be used to cut circle as for pie chart
-        stroke: "5px #080"
+        stroke: "5px #fff"
     });
     return circle;
 }
@@ -32,7 +32,7 @@ function spawnSquare(x, y, r){
         height: r,
         width: r,
         fill: "#18a",
-        stroke: "5px #080"
+        // stroke: "5px #080"
     });
     return square;
 }
@@ -87,15 +87,16 @@ function addShape(shape){
 //output shape to canvas based on shape selected in drop down meny & any aditional menu variables (like stroke & color)
 function outputShape(){
     let shapeColor = document.getElementById('color').value;
-    let strokeVar = Number(document.getElementById('stroke').value);
+    let strokeVar = Number(document.getElementById('stroke-width').value);
     let polySides = Number(document.getElementById('poly-sides').value);
-    console.log(polySides);
+    let strokeCol = document.getElementById('stroke-color').value;
     
     switch(shape) {
         case "square":
             var square = spawnSquare(200, 200, 100);
             square.fill = shapeColor;
             square.strokeWidth = strokeVar;
+            square.strokeColor = strokeCol;
             addShape(square);
         break;
 
@@ -103,13 +104,14 @@ function outputShape(){
             var circle = spawnCircle(500, 500, 100);
             circle.fill = shapeColor;
             circle.strokeWidth = strokeVar;
+            circle.strokeColor = strokeCol;
             addShape(circle);
         break;
 
         case "line":
             var line = spawnLine(200, 200, 300, 300);
             console.log(line);
-            line.strokeWidth = strokeVar;  //hard coded stroke width
+            line.strokeWidth = strokeVar;
             line.strokeColor = shapeColor;
             addShape(line);
         break;
@@ -119,12 +121,14 @@ function outputShape(){
             poly.fill = shapeColor;
             poly.strokeWidth = strokeVar;
             poly.sides = polySides;
+            poly.strokeColor = strokeCol;
             addShape(poly);
         break;
 
 
         default:
-            console.log("please return valid shape parameters");
+            window.alert("please return a shape");
+            console.log("please return a shape");
     }
 }
 
