@@ -64,7 +64,7 @@ function makeFractal3(startX, startY, len, n){
     if(n==0){
         return;
     }
-        fract = spawnSquare(startX, startY, len);
+        fract = spawnSquare(startX, startY, len, len);
         addShape(fract);
  
         makeFractal3(startX + len, startY + len, len * 0.8, n-1);

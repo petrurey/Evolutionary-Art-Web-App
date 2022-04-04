@@ -25,12 +25,12 @@ function spawnImage(x , y){
 }
 
 //function to spawn squares
-function spawnSquare(x, y, r){
+function spawnSquare(x, y, sideH, sideW){
     var square = canvas.display.rectangle({ 
         x: x,
         y: y,
-        height: r,
-        width: r,
+        height: sideH,
+        width: sideW,
         fill: "#18a",
         // stroke: "5px #080"
     });
@@ -84,53 +84,6 @@ function addShape(shape){
     shape.dragAndDrop(dragOptions);
 }
 
-//output shape to canvas based on shape selected in drop down meny & any aditional menu variables (like stroke & color)
-function outputShape(){
-    let shapeColor = document.getElementById('color').value;
-    let strokeVar = Number(document.getElementById('stroke-width').value);
-    let polySides = Number(document.getElementById('poly-sides').value);
-    let strokeCol = document.getElementById('stroke-color').value;
-    
-    switch(shape) {
-        case "square":
-            var square = spawnSquare(200, 200, 100);
-            square.fill = shapeColor;
-            square.strokeWidth = strokeVar;
-            square.strokeColor = strokeCol;
-            addShape(square);
-        break;
-
-        case "circle":
-            var circle = spawnCircle(500, 500, 100);
-            circle.fill = shapeColor;
-            circle.strokeWidth = strokeVar;
-            circle.strokeColor = strokeCol;
-            addShape(circle);
-        break;
-
-        case "line":
-            var line = spawnLine(200, 200, 300, 300);
-            console.log(line);
-            line.strokeWidth = strokeVar;
-            line.strokeColor = shapeColor;
-            addShape(line);
-        break;
-
-        case "polygon":
-            var poly = spawnPoly(500, 500, 3, 100);
-            poly.fill = shapeColor;
-            poly.strokeWidth = strokeVar;
-            poly.sides = polySides;
-            poly.strokeColor = strokeCol;
-            addShape(poly);
-        break;
-
-
-        default:
-            window.alert("please return a shape");
-            console.log("please return a shape");
-    }
-}
 
 // function makeFractal4(startX, startY, len, n){
 //     if(n==0){

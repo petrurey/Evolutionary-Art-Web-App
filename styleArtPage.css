@@ -25,15 +25,21 @@
     }
 
     #shape-menu{
+        display: none;
         position: absolute;
         top: 630px;
         left: 465px;
     }
 
-    .shape-label{
+    #shape-label{
+        display: none;
         position: absolute;
         top: 630px;
         left: 350px;
+    }
+
+    #download{
+        top: 200px;
     }
 
     .shape-label-color{
