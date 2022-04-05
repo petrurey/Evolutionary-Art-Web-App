@@ -19,7 +19,7 @@ function spawnImage(x , y){
         x: x,
         y: y,
         origin: { x: "center", y: "center" },
-        image: "/Users/petrurey/Desktop/1542984793603.jpeg"
+        image: "/Users/petrurey/Downloads/turtle.png"
     });
     return image;
 }

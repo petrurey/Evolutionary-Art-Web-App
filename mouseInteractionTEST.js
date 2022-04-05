@@ -84,10 +84,9 @@ var state = false;
     
 button3.addEventListener('click',() => {
     button3.classList.toggle('active');
-    shape = undefined;                                  // initializing global variable "shape" as undefined so switch statement in coordinatePrint                                                    
-                                                        // can catch catch it if "drawing" is started before selecting a shape
+    shape = undefined;                                  // initializing global variable "shape" as undefined so switch can catch
 
-    if (state == true){                                 //true state unbinds the mouseup & mousedown and allows user to stop drawing shapes 
+    if (state == true){                                 //true state unbinds the mouseup & mousedown and allows user to stop drawing
         canvas.unbind("mousedown", downHandler);        //and go back to dragging / manipulation of current shapes
         canvas.unbind("mouseup", upHandler);
         $("#shape-label").hide();                       // hide shape-lebel & shape-menu when drawing is not engaged

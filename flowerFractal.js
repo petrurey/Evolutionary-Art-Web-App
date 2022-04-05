@@ -1,5 +1,6 @@
 let number = 0;
 let scale = 10;
+zNumber = 100
 
 function drawFlower(){
     let angle = number * 0.5;
@@ -9,10 +10,10 @@ function drawFlower(){
     //canvas.reset();
 
     shape = spawnCircle(positionX, positionY, 20);
-    shape.fill = "";
+    shape.fill = "red";
     shape.stroke = "1px black";
     // shape.zIndex = -number;
-    addShape(shape);
+    addShapeFlower(shape);
 
     number ++;
 }
@@ -23,4 +24,13 @@ function animateFlower(){
         return;
     }
     requestAnimationFrame(animateFlower);
+}
+
+function addShapeFlower(shape){
+    canvas.addChildAt(shape, zNumber);
+    console.log(number);
+    var dragOptions = { changeZindex: true };
+    shape.dragAndDrop(dragOptions);
+    zNumber -= 1
+    console.log(number);
 }
