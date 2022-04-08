@@ -1,20 +1,24 @@
 //function used to calculate the length of the line in between the point there the mouse is clicked and the mouse is let go 
 // (in between mousedown and mouseup)
+function getShapeAttributes(){
+    shapeColor = document.getElementById('color').value;
+    strokeVar = Number(document.getElementById('stroke-width').value);
+    polySides = Number(document.getElementById('poly-sides').value);
+    strokeCol = document.getElementById('stroke-color').value;
+};
+
 function coordinatePrint(){
-    l1 = x1 - x2;
-    l2 = y2 - y1;
+    l1 = x2 - x1;
+    l2 = y1 - y2;
     l3 = Math.sqrt(((l1 * l1) + (l2 * l2)));
     xmid = (x1+x2)/2;
     ymid = (y1+y2)/2;
 
-    let shapeColor = document.getElementById('color').value;
-    let strokeVar = Number(document.getElementById('stroke-width').value);
-    let polySides = Number(document.getElementById('poly-sides').value);
-    let strokeCol = document.getElementById('stroke-color').value;
+    getShapeAttributes();
     
     switch(shape) {
         case "square":
-            var square = spawnSquare(x2, y2, l2, l1);
+            var square = spawnSquare(x1, y1, l2, l1);
             square.setOrigin("left", "bottom");
             square.fill = shapeColor;
             square.strokeWidth = strokeVar;
@@ -23,15 +27,15 @@ function coordinatePrint(){
         break;
 
         case "circle":
-            var circle = spawnCircle(xmid, ymid, l3/2);
-            circle.fill = shapeColor;
-            circle.strokeWidth = strokeVar;
-            circle.strokeColor = strokeCol;
-            addShape(circle);
+            var square = spawnCircle(xmid, ymid, l3/2);
+            square.fill = shapeColor;
+            square.strokeWidth = strokeVar;
+            square.strokeColor = strokeCol;
+            addShape(square);
         break;
 
         case "line":
-            var line = spawnLine(x2, y2, x1, y1);
+            var line = spawnLine(x1, y1, x2, y2);
             line.strokeWidth = strokeVar;
             line.strokeColor = shapeColor;
             addShape(line);
@@ -60,22 +64,22 @@ function coordinatePrint(){
 }
 
 // Handles the fetching of coordinates and printing of object once mouse is up
-function upHandler(){
-    x1 = canvas.mouse.x;
-    y1 = canvas.mouse.y;
+function upHandlerShape(){
+    x2 = canvas.mouse.x;
+    y2 = canvas.mouse.y;
     coordinatePrint();
 }
 
 // Handles the fetching of coordinates once mouse is down
 function downHandler(){
-    x2 = canvas.mouse.x;
-    y2 = canvas.mouse.y;
+    x1 = canvas.mouse.x;
+    y1 = canvas.mouse.y;
 }
 
 // makes mouseup & mousedown carry out the functionality described in upHandler & downHandler respectively
 function interactiveDraw(){
         canvas.bind("mousedown", downHandler);
-        canvas.bind("mouseup", upHandler);
+        canvas.bind("mouseup", upHandlerShape);
 }
 
 //button constant so it can be toggled as active
@@ -88,9 +92,10 @@ button3.addEventListener('click',() => {
 
     if (state == true){                                 //true state unbinds the mouseup & mousedown and allows user to stop drawing
         canvas.unbind("mousedown", downHandler);        //and go back to dragging / manipulation of current shapes
-        canvas.unbind("mouseup", upHandler);
+        canvas.unbind("mouseup", upHandlerShape);
         $("#shape-label").hide();                       // hide shape-lebel & shape-menu when drawing is not engaged
         $("#shape-menu").hide();
+        shapeMenuReset();
         state = false;
         return;
     }

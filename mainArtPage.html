@@ -27,7 +27,7 @@
         });
     </script>
 
-    <!-- Label for drop down menu. -->
+    <!-- Label for shape drop down menu. -->
     <label for="shapeDropDown" id="shape-label">Choose a shape:</label>
 
     <!-- Drop down menu -->
@@ -37,6 +37,16 @@
         <option value="circle">circle</option>
         <option value="line">line</option>
         <option value="polygon">polygon</option>
+    </select>
+
+    <!-- Label for fractal drop down menu. -->
+    <label for="fractalDropDown" id="fractal-label">Choose a fractal:</label>
+
+    <!-- Fractal drop down menu -->
+    <select name="fractalDropDown" id="fractal-menu" onchange="getFractName(this);">
+        <option value="selector">Please select a shape</option>
+        <option value="shape fractals">shape fractals</option>
+        <option value="trigonometric flower">trigonometric flower</option>
     </select>
 
     <!-- Menu for shape color -->
@@ -54,18 +64,17 @@
     </form>
 
     <!-- Buttons -->
-    <button class="button1" onclick="outputShape()"> Spawn <br> Shape </button>
-    <button class="button2" onclick="fractalFromPoint(100,100,90,10,100,10);"> Sqaure Fractal Test </button>
-    <button class="button3"> Draw </button>
-    <button class="button4" onclick="makeFractal4(200,200,100,6)"> oCanvas Fractal Test </button>
-    <button class="button5" onclick="animateFlower()"> Flower Test </button>
+    <button class="button1"> Draw Fractals </button>
+    <button class="button3"> Draw Shapes </button>
+    <button class="button4" onclick="makeFractal2(200,200,30,100,6)"> oCanvas Fractal Test </button>
+    <button class="button5" onclick="fractDraw()"> Flower Test </button>
 
 
-    <script src="fractalFuncionsTEST2.js"> </script>
     <script type="text/javascript" src="ocanvasInteractionObjects.js"> </script>
     <script type="text/javascript" src="fractalFunctionsTEST.js"> </script>
     <script type="text/javascript" src="flowerFractal.js"> </script>
     <script type="text/javascript" src="mouseInteractionTEST.js"> </script>
+    <script type="text/javascript" src="fractalFuncionsTEST2.js"> </script>
 </body>
 
 </html>

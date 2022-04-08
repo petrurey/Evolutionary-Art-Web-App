@@ -6,7 +6,7 @@ function spawnCircle(x, y, r){
         radius: r,
         start: 0,
         end: 360,
-        fill: "#772014",
+        fill: "",
         pieSection: false,  //can be used to cut circle as for pie chart
         stroke: "5px #fff"
     });
@@ -31,7 +31,7 @@ function spawnSquare(x, y, sideH, sideW){
         y: y,
         height: sideH,
         width: sideW,
-        fill: "#18a",
+        fill: "",
         // stroke: "5px #080"
     });
     return square;
@@ -84,22 +84,7 @@ function addShape(shape){
     shape.dragAndDrop(dragOptions);
 }
 
-
-// function makeFractal4(startX, startY, len, n){
-//     if(n==0){
-//         return;
-//     }
-
-//     if (shape == "line"){
-//         console.log(shape);
-//         var newShape = makeLine(100,100,200,200);
-//         newShape.start.x = startX;
-//         newShape.start.y = startX;
-//         newShape.end.x = startX + len;
-//         newShape.end.y = startX + len;
-//         //rotateShape(shape);
-//         addShape(newShape);
-//     }
-//         makeFractal4(startX + len, startY + len, len * 0.8, n-1);
-//         //makeFractal3(startX + len*0.3, startY + len*0.3, len * 0.5, n-1);
-// }
+function shapeMenuReset(){
+    var dropDown = document.getElementById("shape-menu");  
+    dropDown.selectedIndex = "selector";
+}
