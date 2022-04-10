@@ -55,7 +55,7 @@ function spawnPoly(x, y, s, r){
         y: y,
         sides: s,
         radius: r,
-        fill: "#18a"
+        fill: "red"
     });
     return poly;
 }
@@ -64,7 +64,9 @@ function spawnPoly(x, y, s, r){
 // displays any hidden shape-specific menus when that shape is selected in drop-down
 function getSelectShape(selectedShape){
     shape = selectedShape.value;
-
+    
+        $("#shape-menu").show();
+    
         $("#line-settings").hide();
         $("#poly-settings").hide();
 
@@ -84,7 +86,29 @@ function addShape(shape){
     shape.dragAndDrop(dragOptions);
 }
 
-function shapeMenuReset(){
-    var dropDown = document.getElementById("shape-menu");  
-    dropDown.selectedIndex = "selector";
+function menuReset(){
+    var shapeMenu = document.getElementById("shape-drop-down");  
+    var fractMenu = document.getElementById("fractal-menu");
+    fractMenu.selectedIndex = "selector";
+    shapeMenu.selectedIndex = "selector";
+}
+
+function freezeShapes(x){
+    var arrayLength = canvas.children.length;
+    if (x == 0){
+        for (let i = 0; i < arrayLength ; i++){
+            console.log(i + "freezing");
+            var child = canvas.children[i];
+            child.dragAndDrop(false);
+        }
+        return;
+    } else if (x == 1){
+        for (let i = 0; i < arrayLength ; i++){
+            console.log(i + "unlocked");
+            var child = canvas.children[i];
+            child.dragAndDrop(true);
+        }
+    }
+
+    // var test = canvas.children[1].dragAndDrop(false)
 }

@@ -2,6 +2,11 @@ const button1 = document.querySelector('.button1');
 var state = false;
 
 button1.addEventListener('click',() => {
+    if (button3.classList.contains("active")){
+        window.alert("please unclick any other drawing buttons");
+        return;
+    }
+
     button1.classList.toggle('active');
     shape = undefined;                                  // initializing global variable "shape" as undefined so switch can catch
 
@@ -11,22 +16,23 @@ button1.addEventListener('click',() => {
 
         $("#fractal-label").hide();                       // hide shape-lebel & shape-menu when drawing is not engaged
         $("#fractal-menu").hide();
-        $("#shape-label").hide();                       // hide shape-lebel & shape-menu when drawing is not engaged
-        $("#shape-menu").hide();
+        $("#shape-settings").hide();
+        $("#shape-menu").hide();                       
+        $("#iter-label").hide();
 
-        shapeMenuReset();
+        menuReset();
 
         state = false;
         return;
     }
 
     if (state == false){                                //falase state allows user to draw new shapes 
-        state = true;
         canvas.bind("mousedown", downHandler);
         canvas.bind("mouseup", upHandlerFract);
 
         $("#fractal-label").show();                       // show shape-lebel & shape-menu when drawing is engaged
         $("#fractal-menu").show();
+        state = true;
 
         return;
     }
@@ -48,6 +54,7 @@ function squareFract(startX, startY, len, n){
         fractParent.addChild(fract);
 
         squareFract(startX + len, startY + len, len * 0.8, n-1);
+        // squareFract(startX - len*0.8, startY - len*0.8, len * 0.8, n-1);
 
 }
 
@@ -68,6 +75,25 @@ function circleFract(startX, startY, len, n){
 
     circleFract(startX + len, startY + len, len * 0.8, n-1);
 
+}
+
+function polyFract(startX, startY, sides, len, n){
+    fract = spawnPoly(startX-x1, startY-y1, sides, len);
+
+    getShapeAttributes();
+
+    fract.fill = shapeColor;
+    fract.strokeWidth = strokeVar;
+    fract.strokeColor = strokeCol;
+    fract.sides = polySides;
+
+    if(n==0){
+        return;
+    }
+
+    fractParent.addChild(fract);
+
+    polyFract(startX + len, startY + len, polySides, len * 0.8, n-1);
 }
 
 function lineFract(startX, startY, endX, endY, n){
@@ -101,8 +127,8 @@ function getFractName(fract){
     fract = fract.value;
     console.log(fract);
         if(fract === "shape fractals"){
-            $("#shape-label").toggle();                       // show shape-lebel & shape-menu when drawing is engaged
-            $("#shape-menu").toggle();
+            $("#shape-settings").show();                       // show shape-lebel & shape-menu when drawing is engaged
+            $("#iter-label").show();
         } 
     return fract;
 }
@@ -126,6 +152,7 @@ function calculateAlpha(){
 }
 
 function fractDraw(){
+    iterN = Number(document.getElementById('iter-input').value);
 
     calculateAlpha();
 
@@ -133,30 +160,29 @@ function fractDraw(){
         case "square":
             fractParent = spawnSquare(x2, y2, l3, l3);
             fractParent.rotate(alpha);
-            squareFract(x1, y1, l3, 3);
+            squareFract(x1, y1, l3, iterN);
+            addShape(fractParent);
         break;
 
         case "circle":
             fractParent = spawnCircle(xmid, ymid, l3/2);
             fractParent.rotate(alpha);
-            circleFract(x1, y1, l3/2, 3);
+            circleFract(x1, y1, l3/2, iterN);
+            addShape(fractParent);
         break;
 
         case "line":
             fractParent = spawnLine(x1, y1, x2, y2);
             // line.strokeWidth = strokeVar;
             // line.strokeColor = shapeColor;
-            lineFract(x1, y1, x2, y2, 3);
+            lineFract(x1, y1, x2, y2, iterN);
         break;
 
         case "polygon":
-            console.log("poly selected");
-            var poly = spawnPoly(xmid, ymid, 3, l3/2);
-            poly.fill = shapeColor;
-            poly.strokeWidth = strokeVar;
-            poly.sides = polySides;
-            poly.strokeColor = strokeCol;
-            addShape(poly);
+            fractParent = spawnPoly(xmid, ymid, 3, l3/2);
+            fractParent.rotate(alpha);
+            polyFract(x1, y1, 3, l3/2, iterN);
+            addShape(fractParent);
         break;
 
         case undefined:
@@ -169,34 +195,4 @@ function fractDraw(){
             console.log("please return a shape");
         break;
     }
-    addShape(fractParent);
 }
-
-
-
-
-// addChild() TESTING BELOW
-
-// var box  = canvas.display.rectangle({ 
-//     x: 300, 
-//     y: 300, 
-//     width: 50, 
-//     height: 50, 
-//     fill: "#000"
-// });
-
-
-// var square  = canvas.display.rectangle({ x: 100, y: 100, width: 100, height: 100, fill: "#990000"});
-// var circle = canvas.display.arc({  //define first arc (circle)
-//     x: 400,
-//     y: 100,
-//     radius: 100,
-//     start: 0,
-//     end: 360,
-//     fill: "#772014",
-//     pieSection: false,  //can be used to cut circle as for pie chart
-//     stroke: "5px #fff"
-// });
-// box.addChild(square);
-// box.addChild(circle);
-// addShape(box);

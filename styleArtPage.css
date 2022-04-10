@@ -2,6 +2,17 @@
     margin: 1;
     padding: 1;
     box-sizing: border-box;
+}
+    #shape-settings{
+        display: none;
+        position: absolute;
+        top: 630px;
+        left: 350px;
+    }
+
+    #shape-menu{
+        display: none;
+        position: absolute;
     }
 
     #canvas {
@@ -24,20 +35,6 @@
         left: 1020px;
     }
 
-    #shape-menu{
-        display: none;
-        position: absolute;
-        top: 630px;
-        left: 465px;
-    }
-
-    #shape-label{
-        display: none;
-        position: absolute;
-        top: 630px;
-        left: 350px;
-    }
-
     #fractal-menu{
         display: none;
         position: absolute;
@@ -50,6 +47,13 @@
         position: absolute;
         top: 630px;
         left: 50px;
+    }
+
+    #iter-label{
+        display: none;
+        position: absolute;
+        top: 700px;;
+        left: 100px;
     }
 
 

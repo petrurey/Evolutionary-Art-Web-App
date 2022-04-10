@@ -8,10 +8,20 @@ function drawFlower(){
     let positionX = radius * Math.sin(angle) + canvas.width/2;
     let positionY = radius * Math.cos(angle) + canvas.height/2;
     //canvas.reset();
+    if (number == 0){
+        // console.log(number);
+        parentShape = spawnCircle(100, 100, 20);
+        addShape(parentShape);
+    }
+
+    // shape = spawnCircle(positionX, positionY, 20);
+    // shape.fill = "red";
+    // shape.stroke = "1px black";
 
     shape = spawnCircle(positionX, positionY, 20);
     shape.fill = "red";
     shape.stroke = "1px black";
+
     // shape.zIndex = -number;
     addShapeFlower(shape);
 
@@ -19,6 +29,7 @@ function drawFlower(){
 }
 
 function animateFlower(){
+    console.log(number);
     drawFlower();
     if (number > 500){
         return;
@@ -27,10 +38,10 @@ function animateFlower(){
 }
 
 function addShapeFlower(shape){
-    canvas.addChildAt(shape, zNumber);
+    parentShape.addChildAt(shape, zNumber);
     console.log(number);
-    var dragOptions = { changeZindex: true };
-    shape.dragAndDrop(dragOptions);
+    var dragOptions = { changeZindex: false };
+    // shape.dragAndDrop(dragOptions);
     zNumber -= 1
     console.log(number);
 }

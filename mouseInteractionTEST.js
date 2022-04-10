@@ -87,24 +87,28 @@ const button3 = document.querySelector('.button3');
 var state = false;
     
 button3.addEventListener('click',() => {
+    if (button1.classList.contains("active")){
+        window.alert("please unclick any other drawing buttons");
+        return;
+    }
+
     button3.classList.toggle('active');
-    shape = undefined;                                  // initializing global variable "shape" as undefined so switch can catch
+    shape = undefined;
 
     if (state == true){                                 //true state unbinds the mouseup & mousedown and allows user to stop drawing
         canvas.unbind("mousedown", downHandler);        //and go back to dragging / manipulation of current shapes
         canvas.unbind("mouseup", upHandlerShape);
-        $("#shape-label").hide();                       // hide shape-lebel & shape-menu when drawing is not engaged
-        $("#shape-menu").hide();
-        shapeMenuReset();
+        $("#shape-settings").hide(); 
+        $("#shape-menu").hide();                      // hide shape-lebel & shape-menu when drawing is not engaged
+        menuReset();
         state = false;
         return;
     }
 
     if (state == false){                                //falase state allows user to draw new shapes 
-        state = true;
-        $("#shape-label").show();                       // show shape-lebel & shape-menu when drawing is engaged
-        $("#shape-menu").show();
+        $("#shape-settings").show();                       // show shape-lebel & shape-menu when drawing is engaged
         interactiveDraw();
+        state = true;
         return;
     }
 });
