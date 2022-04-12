@@ -41,7 +41,7 @@ button1.addEventListener('click',() => {
 function squareFract(startX, startY, len, n){
         fract = spawnSquare(startX-x1, startY-y1, len, len);
 
-        getShapeAttributes();
+        missingColorCatcher();
 
         fract.fill = shapeColor;
         fract.strokeWidth = strokeVar;
@@ -115,8 +115,6 @@ function lineFract(startX, startY, endX, endY, n){
 
 }
 
-
-
 function upHandlerFract(){
     x2 = canvas.mouse.x;
     y2 = canvas.mouse.y;
@@ -154,8 +152,13 @@ function calculateAlpha(){
 function fractDraw(){
     iterN = Number(document.getElementById('iter-input').value);
 
-    calculateAlpha();
+    if (iterN > 25){
+        iterN  = 25;
+    }
 
+
+    calculateAlpha();
+    console.log(iterN);
     switch(shape) {
         case "square":
             fractParent = spawnSquare(x2, y2, l3, l3);
@@ -195,4 +198,5 @@ function fractDraw(){
             console.log("please return a shape");
         break;
     }
+
 }

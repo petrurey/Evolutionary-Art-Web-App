@@ -56,6 +56,15 @@
         left: 100px;
     }
 
+    #stroke-width{
+        top: 625px;;
+        left: 1100px;
+    }
+
+    #stroke-color{
+        top: 625px;;
+        left: 1250px;
+    }
 
     .shape-label-color{
         position: absolute;

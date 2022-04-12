@@ -7,6 +7,30 @@ function getShapeAttributes(){
     strokeCol = document.getElementById('stroke-color').value;
 };
 
+function calculateSquare(){
+    
+    if (x1 < x2 && y1 > y2){
+
+        var square = spawnSquare(x1, y1, l2, l1);
+        square.setOrigin("left", "bottom");
+
+    } else if (x1 < x2 && y1 < y2){
+
+        var square = spawnSquare(x1, y1, l2, l1);
+
+    } else if (x1 > x2 && y1 < y2){
+
+        var square = spawnSquare(x2, y2, l2, l1);
+        square.setOrigin("left", "bottom");
+
+    } else if ( x1 > x2 && y1 > y2){
+    
+        var square = spawnSquare(x2, y2, l2, l1);
+    }
+
+    return square;
+}
+
 function coordinatePrint(){
     l1 = x2 - x1;
     l2 = y1 - y2;
@@ -14,24 +38,27 @@ function coordinatePrint(){
     xmid = (x1+x2)/2;
     ymid = (y1+y2)/2;
 
-    getShapeAttributes();
-    
+    l2 = Math.abs(l2);
+    l1 = Math.abs(l1);
+
+    missingColorCatcher();
+
     switch(shape) {
         case "square":
-            var square = spawnSquare(x1, y1, l2, l1);
-            square.setOrigin("left", "bottom");
+            square = calculateSquare();
             square.fill = shapeColor;
             square.strokeWidth = strokeVar;
             square.strokeColor = strokeCol;
             addShape(square);
+
         break;
 
         case "circle":
-            var square = spawnCircle(xmid, ymid, l3/2);
-            square.fill = shapeColor;
-            square.strokeWidth = strokeVar;
-            square.strokeColor = strokeCol;
-            addShape(square);
+            var circle = spawnCircle(xmid, ymid, l3/2);
+            circle.fill = shapeColor;
+            circle.strokeWidth = strokeVar;
+            circle.strokeColor = strokeCol;
+            addShape(circle);
         break;
 
         case "line":
@@ -61,13 +88,16 @@ function coordinatePrint(){
             console.log("please return a shape");
         break;
     }
+    console.log(canvas.children);
 }
 
 // Handles the fetching of coordinates and printing of object once mouse is up
 function upHandlerShape(){
     x2 = canvas.mouse.x;
     y2 = canvas.mouse.y;
-    coordinatePrint();
+
+    oCanvas.domReady(coordinatePrint());
+    // freezeShapes(true);
 }
 
 // Handles the fetching of coordinates once mouse is down
@@ -99,15 +129,18 @@ button3.addEventListener('click',() => {
         canvas.unbind("mousedown", downHandler);        //and go back to dragging / manipulation of current shapes
         canvas.unbind("mouseup", upHandlerShape);
         $("#shape-settings").hide(); 
-        $("#shape-menu").hide();                      // hide shape-lebel & shape-menu when drawing is not engaged
+        $("#shape-menu").hide();  
+        console.log("unclicked")                    
         menuReset();
+        // freezeShapes(false);
         state = false;
         return;
     }
 
     if (state == false){                                //falase state allows user to draw new shapes 
-        $("#shape-settings").show();                       // show shape-lebel & shape-menu when drawing is engaged
+        $("#shape-settings").show();                      // show shape-lebel & shape-menu when drawing is engaged
         interactiveDraw();
+        // freezeShapes(true);     
         state = true;
         return;
     }

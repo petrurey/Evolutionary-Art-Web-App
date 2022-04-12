@@ -6,7 +6,7 @@ function spawnCircle(x, y, r){
         radius: r,
         start: 0,
         end: 360,
-        fill: "",
+        fill: "red",
         pieSection: false,  //can be used to cut circle as for pie chart
         stroke: "5px #fff"
     });
@@ -32,7 +32,7 @@ function spawnSquare(x, y, sideH, sideW){
         height: sideH,
         width: sideW,
         fill: "",
-        // stroke: "5px #080"
+        stroke: "",
     });
     return square;
 }
@@ -64,17 +64,16 @@ function spawnPoly(x, y, s, r){
 // displays any hidden shape-specific menus when that shape is selected in drop-down
 function getSelectShape(selectedShape){
     shape = selectedShape.value;
-    
-        $("#shape-menu").show();
-    
-        $("#line-settings").hide();
-        $("#poly-settings").hide();
 
-        if(shape === "line"){
-            $("#line-settings").show();
-        } else if (shape === "polygon") {
-            $("#poly-settings").show();
-        }
+    $("#stroke-color").show();
+    $("#poly-settings").hide();
+    $("#shape-menu").show();
+
+    if(shape === "line"){
+        $("#stroke-color").hide();
+    } else if (shape === "polygon") {
+        $("#poly-settings").show();
+    }
 
     return shape;
 }
@@ -93,22 +92,40 @@ function menuReset(){
     shapeMenu.selectedIndex = "selector";
 }
 
-function freezeShapes(x){
-    var arrayLength = canvas.children.length;
-    if (x == 0){
-        for (let i = 0; i < arrayLength ; i++){
-            console.log(i + "freezing");
-            var child = canvas.children[i];
-            child.dragAndDrop(false);
-        }
-        return;
-    } else if (x == 1){
-        for (let i = 0; i < arrayLength ; i++){
-            console.log(i + "unlocked");
-            var child = canvas.children[i];
-            child.dragAndDrop(true);
-        }
-    }
+function missingColorCatcher() {
+    getShapeAttributes();
 
-    // var test = canvas.children[1].dragAndDrop(false)
+    if (shapeColor === "" && strokeVar === 0){
+        window.alert("please choose a shape color");
+        return;
+    }
 }
+
+// function freezeShapes(freezeState){
+//     var arrayLength = canvas.children.length;
+
+//     if (freezeState === true && arrayLength > 0){
+//         for (let i = 0; i < arrayLength ; i++){
+//             var child = canvas.children[i];
+//             if (child.draggable === true){
+//                 // child.dragAndDrop(false);
+//             }
+//         }
+//     } else if (freezeState === false){
+//         for (let i = 0; i < arrayLength ; i++){
+//             var child = canvas.children[i];
+//             console.log("drag state " + child + " " + child.draggable);
+//             console.log(child);
+//             child.dragAndDrop(true);
+//             console.log("drag state " + child + " " + child.draggable);
+//             // if (child.draggable === false){
+//             //     console.log("drag state " + child + " " + child.draggable);
+//             //     console.log(child);
+//             //     child.dragAndDrop(dragOptions);
+//             //     console.log("drag state " + child + " " + child.draggable);
+//             // }
+//         }
+//     }
+
+//     // var test = canvas.children[1].dragAndDrop(false)
+// }
