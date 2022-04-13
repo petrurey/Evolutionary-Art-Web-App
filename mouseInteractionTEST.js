@@ -41,7 +41,7 @@ function coordinatePrint(){
     l2 = Math.abs(l2);
     l1 = Math.abs(l1);
 
-    missingColorCatcher();
+    getShapeAttributes();
 
     switch(shape) {
         case "square":
@@ -96,8 +96,8 @@ function upHandlerShape(){
     x2 = canvas.mouse.x;
     y2 = canvas.mouse.y;
 
-    oCanvas.domReady(coordinatePrint());
-    // freezeShapes(true);
+    coordinatePrint();
+    freezeShapes(true);
 }
 
 // Handles the fetching of coordinates once mouse is down
@@ -132,7 +132,7 @@ button3.addEventListener('click',() => {
         $("#shape-menu").hide();  
         console.log("unclicked")                    
         menuReset();
-        // freezeShapes(false);
+        freezeShapes(false);
         state = false;
         return;
     }
@@ -140,7 +140,7 @@ button3.addEventListener('click',() => {
     if (state == false){                                //falase state allows user to draw new shapes 
         $("#shape-settings").show();                      // show shape-lebel & shape-menu when drawing is engaged
         interactiveDraw();
-        // freezeShapes(true);     
+        freezeShapes(true);     
         state = true;
         return;
     }

@@ -1,9 +1,9 @@
 let number = 0;
 let scale = 10;
-zNumber = 100
+zNumber = 100;
 
 function drawFlower(){
-    let angle = number * 0.5;
+    let angle = number * 0.9;
     let radius = scale * Math.sqrt(number);
     let positionX = radius * Math.sin(angle) + canvas.width/2;
     let positionY = radius * Math.cos(angle) + canvas.height/2;

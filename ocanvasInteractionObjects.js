@@ -6,7 +6,7 @@ function spawnCircle(x, y, r){
         radius: r,
         start: 0,
         end: 360,
-        fill: "red",
+        fill: "",
         pieSection: false,  //can be used to cut circle as for pie chart
         stroke: "5px #fff"
     });
@@ -42,7 +42,7 @@ function spawnLine(startX, startY, endX, endY){
     var line = canvas.display.line({
         start: {x: startX, y: startY},
         end: {x: endX, y: endY},
-        stroke: "10px #363635",
+        stroke: "",
         cap: "round",
     });
     return line;
@@ -55,7 +55,7 @@ function spawnPoly(x, y, s, r){
         y: y,
         sides: s,
         radius: r,
-        fill: "red"
+        fill: ""
     });
     return poly;
 }
@@ -92,40 +92,21 @@ function menuReset(){
     shapeMenu.selectedIndex = "selector";
 }
 
-function missingColorCatcher() {
-    getShapeAttributes();
+function freezeShapes(freezeState){
+    var arrayLength = canvas.children.length;
 
-    if (shapeColor === "" && strokeVar === 0){
-        window.alert("please choose a shape color");
-        return;
+    if (freezeState === true){
+        for (let i = 0; i < arrayLength ; i++){
+            var child = canvas.children[i];
+            if (child.draggable === true){
+                console.log(child + " frozen");
+                child.dragAndDrop(false);
+            }
+        }
+    } else if (freezeState === false){
+        for (let i = 0; i < arrayLength ; i++){
+            var child = canvas.children[i];
+            child.dragAndDrop(true);
+        }
     }
 }
-
-// function freezeShapes(freezeState){
-//     var arrayLength = canvas.children.length;
-
-//     if (freezeState === true && arrayLength > 0){
-//         for (let i = 0; i < arrayLength ; i++){
-//             var child = canvas.children[i];
-//             if (child.draggable === true){
-//                 // child.dragAndDrop(false);
-//             }
-//         }
-//     } else if (freezeState === false){
-//         for (let i = 0; i < arrayLength ; i++){
-//             var child = canvas.children[i];
-//             console.log("drag state " + child + " " + child.draggable);
-//             console.log(child);
-//             child.dragAndDrop(true);
-//             console.log("drag state " + child + " " + child.draggable);
-//             // if (child.draggable === false){
-//             //     console.log("drag state " + child + " " + child.draggable);
-//             //     console.log(child);
-//             //     child.dragAndDrop(dragOptions);
-//             //     console.log("drag state " + child + " " + child.draggable);
-//             // }
-//         }
-//     }
-
-//     // var test = canvas.children[1].dragAndDrop(false)
-// }

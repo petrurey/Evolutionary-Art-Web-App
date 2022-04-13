@@ -8,13 +8,14 @@ My 3rd year Computer Science BSc final project: Evolutionary Art Web App. I am u
 
 This script uses trigonomertry to create beautiful "flower" looking recursive shapes. I got inspired from [this tutorial](https://www.youtube.com/watch?v=ymmtEgp0Tuc&t=2s&ab_channel=Frankslaboratory) and converted the code to work with the oCanvas library.
 
-### ⭐ fractalFunctionsTEST2.js
+### ⭐ fractalFunctions.js
 
-I used this for the initial implementation of "fractal algorithm" using the standard canvas tools. This recursive algorithm was the basis when I tried converting to the use of oCanvas.
+Contains all the fractal functions. These are iterative functions that spawn one "fractal" shape.
 
-### ⭐ fractalFunctionsTEST.js
+### ⭐ fractalInteraction.js
 
-I decided to create another fractal functions file to explore the possibility of various different outputs from functions as well as how those might work when translated using oCanvas.
+Contains all the methods that are used to control the creation of fractals and handle all user interaction when it comes to drawing
+fractals.
 
 ### ⭐ mainArtPage.html
 
