@@ -32,11 +32,7 @@ function calculateSquare(){
 }
 
 function coordinatePrint(){
-    l1 = x2 - x1;
-    l2 = y1 - y2;
-    l3 = Math.sqrt(((l1 * l1) + (l2 * l2)));
-    xmid = (x1+x2)/2;
-    ymid = (y1+y2)/2;
+    getCoordinates();
 
     l2 = Math.abs(l2);
     l1 = Math.abs(l1);
@@ -46,6 +42,12 @@ function coordinatePrint(){
     switch(shape) {
         case "square":
             square = calculateSquare();
+
+            if(x1 === x2 || y1 === y2){
+                window.alert("please drag the mouse to create a rectangle");
+                return;
+            }
+
             square.fill = shapeColor;
             square.strokeWidth = strokeVar;
             square.strokeColor = strokeCol;
@@ -113,7 +115,7 @@ function interactiveDraw(){
 }
 
 //button constant so it can be toggled as active
-const button3 = document.querySelector('.button3');
+const button3 = document.querySelector('.button2');
 var state = false;
     
 button3.addEventListener('click',() => {

@@ -10,15 +10,19 @@ button1.addEventListener('click',() => {
     button1.classList.toggle('active');
     shape = undefined;                                  // initializing global variable "shape" as undefined so switch can catch
 
-    if (state == true){                                 //true state unbinds the mouseup & mousedown and allows user to stop drawing
-        canvas.unbind("mousedown", downHandler);        //and go back to dragging / manipulation of current shapes
-        canvas.unbind("mouseup", upHandlerFract);
+    if (state === true){            
+        console.log("unbinded");                     //true state unbinds the mouseup & mousedown and allows user to stop drawing
+        unbindFlower();
+        unbindFract();
+
+        freezeShapes(false);
 
         $("#fractal-label").hide();                       // hide shape-lebel & shape-menu when drawing is not engaged
         $("#fractal-menu").hide();
         $("#shape-settings").hide();
         $("#shape-menu").hide();                       
         $("#iter-label").hide();
+        $("#flower-settings").hide();
 
         menuReset();
 
@@ -26,46 +30,68 @@ button1.addEventListener('click',() => {
         return;
     }
 
-    if (state == false){                                //falase state allows user to draw new shapes 
-        canvas.bind("mousedown", downHandler);
-        canvas.bind("mouseup", upHandlerFract);
+    if (state === false){     
+        
+        freezeShapes(true);  
 
         $("#fractal-label").show();                       // show shape-lebel & shape-menu when drawing is engaged
-        $("#fractal-menu").show();
+        $("#fractal-menu").show();  
+
         state = true;
 
         return;
     }
 });
 
+function bindFract(){
+    canvas.bind("mousedown", downHandler);
+    canvas.bind("mouseup", upHandlerFract);
+}
+
+function unbindFract(){
+    canvas.unbind("mousedown", downHandler);        //and go back to dragging / manipulation of current shapes
+    canvas.unbind("mouseup", upHandlerFract);
+}
+
+
 function upHandlerFract(){
     x2 = canvas.mouse.x;
     y2 = canvas.mouse.y;
     fractDraw();
+    freezeShapes(true);
 }
 
 function getFractName(fract){
     fract = fract.value;
     $("#iter-label").hide();
+    $("#flower-settings").hide();
         if (fract === "selector"){
-            window.alert("please return a fractal type");
-            console.log("please return a shape");
+            unbindFlower();
+            unbindFract();
         } else if(fract === "shape fractals"){
+
             $("#shape-settings").show();                       // show shape-lebel & shape-menu when drawing is engaged
             $("#iter-label").show();
+
+            unbindFlower();
+            bindFract();
+
         } else if (fract === "trigonometric flower"){
-            console.log("trigonometric flower");
+
+            unbindFract();
+            bindFlower();
+
+            $(".button3").show();
             $("#shape-settings").show();
+            $("#iter-label").show();
+            $("#random-check").show();
+
         }
     return fract;
 }
 
 function calculateAlpha(){
-    l1 = x2 - x1;
-    l2 = y1 - y2;
-    l3 = Math.sqrt(((l1 * l1) + (l2 * l2)));
-    xmid = (x1+x2)/2;
-    ymid = (y1+y2)/2;
+    getCoordinates();
 
     alpha = (Math.asin(l1/l3)) * (180/Math.PI);
     if (x1 < x2 && y1 < y2){
@@ -128,3 +154,4 @@ function fractDraw(){
     }
 
 }
+

@@ -47,7 +47,7 @@
 
             <label for="shapeDropDown" class="shape-label-stroke">Shape stroke (px)<br> & color:</label>
             <input type="text" name="stroke-width" id="stroke-width" class="shape-menu-stroke-width">
-            <input type="text" name="stroke-color" id="stroke-color" class="shape-menu-stroke-color">
+            <input type="color" name="stroke-color" id="stroke-color" class="shape-menu-stroke-color">
         </form>
 
         <!-- input for polygon sides -->
@@ -59,7 +59,24 @@
         <!-- input for number of fractal iterations -->
         <form id="iter-label">
             <label for="iter-label">Number of Iterations: </label>
-            <input type='text' class='text' name='iter-settings' id='iter-input' value size='2'/>
+            <input type='text' class='text' name='iter-settings' id='iter-input' size='3' value="5"/>
+        </form>
+
+        <form id='random-check'>
+            <label for="random-check"> Random Flower? </label>
+            <input type='checkbox' id='check' name='random-check'/>
+        </form>
+
+
+        <form id="flower-settings">
+            <label for="leaf-range">Leaf size: </label>
+            <input type='range' id='petal' name='leaf-range' min="1" max="50"/>
+                <br>
+            <label for="scale-range">Scale size: </label>
+            <input type='range' id='scale' name='scale-range' min="1" max="20"/>
+                <br>
+            <label for="leaf-angle">Leaf angle: </label>
+            <input type='range' id='angle' name='leaf-angle' min="1" max="100"/>
         </form>
 
         <!-- drop down menu for choosing shape types -->
@@ -74,14 +91,14 @@
 
         <!-- Buttons -->
         <button class="button1"> Draw Fractals </button>
-        <button class="button3"> Draw Shapes </button>
-        <button class="button4" onclick="addShape(spawnSquare(100,200,200,200))"> oCanvas Fractal Test </button>
-        <button class="button5" onclick="animateFlower()"> Flower Test </button>
+        <button class="button2"> Draw Shapes </button>
+        <button class="button3" onclick="flowerBind()"> Flower Test </button>
+        <!-- <button class="button4" onclick="addShape(spawnSquare(100,200,200,200))"> oCanvas Fractal Test </button> -->
 
 
         <script type="text/javascript" src="ocanvasInteractionObjects.js"> </script>
         <script type="text/javascript" src="fractalInteraction.js"> </script>
-        <script type="text/javascript" src="flowerFractal.js"> </script>
+        <script type="text/javascript" src="flowerAnimateTEST.js"> </script>
         <script type="text/javascript" src="mouseInteractionTEST.js"> </script>
         <script type="text/javascript" src="fractalFuncions.js"> </script>
     </body>

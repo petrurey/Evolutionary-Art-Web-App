@@ -52,7 +52,7 @@
     #iter-label{
         display: none;
         position: absolute;
-        top: 700px;;
+        top: 670px;;
         left: 100px;
     }
 
@@ -64,6 +64,20 @@
     #stroke-color{
         top: 625px;;
         left: 1250px;
+    }
+
+    #random-check{
+        display: none;
+        position: absolute;
+        top: 700px;;
+        left: 100px;
+    }
+
+    #flower-settings{
+        display: none;
+        position: absolute;
+        top: 700px;;
+        left: 100px;
     }
 
     .shape-label-color{
@@ -123,21 +137,22 @@
         box-shadow: none;
     }
 
-    .button3 {
+    .button2 {
         top: 650px;
         left: 700px;
         box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
         cursor: pointer;
     }
 
-    .button3:active,
+    .button2:active,
     .active{
         background-color: #00CCC0;
         border: 1px #000000 solid;
         box-shadow: none;
     }
 
-    .button4 {
+    .button3 {
+        display: none;
         top: 650px;
         left: 870px;
     }

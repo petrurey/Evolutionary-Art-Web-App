@@ -6,7 +6,7 @@ My 3rd year Computer Science BSc final project: Evolutionary Art Web App. I am u
 
 ### ⭐ flowerFractal.js
 
-This script uses trigonomertry to create beautiful "flower" looking recursive shapes. I got inspired from [this tutorial](https://www.youtube.com/watch?v=ymmtEgp0Tuc&t=2s&ab_channel=Frankslaboratory) and converted the code to work with the oCanvas library.
+This script uses trigonomertry to create beautiful "flower" looking recursive shapes. I got inspired from [this tutorial](https://www.youtube.com/watch?v=ymmtEgp0Tuc&t=2s&ab_channel=Frankslaboratory) and converted the code to work with the oCanvas library and further inputs.
 
 ### ⭐ fractalFunctions.js
 

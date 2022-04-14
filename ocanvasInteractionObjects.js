@@ -8,7 +8,7 @@ function spawnCircle(x, y, r){
         end: 360,
         fill: "",
         pieSection: false,  //can be used to cut circle as for pie chart
-        stroke: "5px #fff"
+        stroke: ""
     });
     return circle;
 }
@@ -110,3 +110,20 @@ function freezeShapes(freezeState){
         }
     }
 }
+
+function getCoordinates(){
+    l1 = x2 - x1;
+    l2 = y1 - y2;
+    l3 = Math.sqrt(((l1 * l1) + (l2 * l2)));
+    xmid = (x1+x2)/2;
+    ymid = (y1+y2)/2;
+
+    console.log("(x1 y1): " + x1 + " " + y1 + " (x2 y2): " + x2 + y2);
+}
+
+//copied from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+  }
