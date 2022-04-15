@@ -23,6 +23,7 @@ button1.addEventListener('click',() => {
         $("#shape-menu").hide();                       
         $("#iter-label").hide();
         $("#flower-settings").hide();
+        $("#random-check").hide();
 
         menuReset();
 
