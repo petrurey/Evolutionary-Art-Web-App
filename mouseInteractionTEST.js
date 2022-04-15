@@ -40,7 +40,7 @@ function coordinatePrint(){
     getShapeAttributes();
 
     switch(shape) {
-        case "square":
+        case "rectangle":
             square = calculateSquare();
 
             if(x1 === x2 || y1 === y2){
@@ -116,7 +116,7 @@ function interactiveDraw(){
 
 //button constant so it can be toggled as active
 const button3 = document.querySelector('.button2');
-var state = false;
+var state = true;
     
 button3.addEventListener('click',() => {
     if (button1.classList.contains("active")){
@@ -127,23 +127,19 @@ button3.addEventListener('click',() => {
     button3.classList.toggle('active');
     shape = undefined;
 
-    if (state == true){                                 //true state unbinds the mouseup & mousedown and allows user to stop drawing
+    if (state == false){                                 //true state unbinds the mouseup & mousedown and allows user to stop drawing
         canvas.unbind("mousedown", downHandler);        //and go back to dragging / manipulation of current shapes
         canvas.unbind("mouseup", upHandlerShape);
         $("#shape-settings").hide(); 
         $("#shape-menu").hide();  
         console.log("unclicked")                    
         menuReset();
-        freezeShapes(false);
-        state = false;
-        return;
-    }
-
-    if (state == false){                                //falase state allows user to draw new shapes 
+        freezeShapes(state);
+        state = true;
+    } else if (state == true){                                //falase state allows user to draw new shapes 
         $("#shape-settings").show();                      // show shape-lebel & shape-menu when drawing is engaged
         interactiveDraw();
-        freezeShapes(true);     
-        state = true;
-        return;
+        freezeShapes(state);     
+        state = false;
     }
 });

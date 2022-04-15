@@ -88,6 +88,7 @@ function addShape(shape){
 function menuReset(){
     var shapeMenu = document.getElementById("shape-drop-down");  
     var fractMenu = document.getElementById("fractal-menu");
+    document.getElementById("check").checked = true;
     fractMenu.selectedIndex = "selector";
     shapeMenu.selectedIndex = "selector";
 }
@@ -98,6 +99,15 @@ function freezeShapes(freezeState){
     if (freezeState === true){
         for (let i = 0; i < arrayLength ; i++){
             var child = canvas.children[i];
+
+            console.log("cursor unbinded");
+
+            child.bind("mouseenter", function () {
+                canvas.mouse.cursor("default");
+            }).bind("mouseleave", function () {
+                canvas.mouse.cursor("default");
+            });
+
             if (child.draggable === true){
                 console.log(child + " frozen");
                 child.dragAndDrop(false);
@@ -107,6 +117,10 @@ function freezeShapes(freezeState){
         for (let i = 0; i < arrayLength ; i++){
             var child = canvas.children[i];
             child.dragAndDrop(true);
+
+            child.bind("mouseenter", function () {
+                canvas.mouse.cursor("pointer");
+            });
         }
     }
 }
@@ -127,3 +141,22 @@ function getRandomInt(min, max) {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
   }
+
+// https://stackoverflow.com/questions/923885/capture-html-canvas-as-gif-jpg-png-pdf
+function exportCanvas() {
+
+    var canvasElement = document.getElementById("canvas");
+
+    var fileType = "image/png";
+
+    var imgURL = canvasElement.toDataURL("image/png");
+
+    var dlLink = document.createElement('a');
+    dlLink.download = "downloadImg";
+    dlLink.href = imgURL;
+    dlLink.dataset.downloadurl = [fileType, dlLink.download, dlLink.href].join(':');
+
+    document.body.appendChild(dlLink);
+    dlLink.click();
+    document.body.removeChild(dlLink);
+}

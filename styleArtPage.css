@@ -76,7 +76,7 @@
     #flower-settings{
         display: none;
         position: absolute;
-        top: 700px;;
+        top: 750px;;
         left: 100px;
     }
 
@@ -152,7 +152,6 @@
     }
 
     .button3 {
-        display: none;
         top: 650px;
         left: 870px;
     }

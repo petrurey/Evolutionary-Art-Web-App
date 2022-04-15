@@ -12,20 +12,16 @@
     <body>
         <!-- initiating canvas  -->
         <canvas id="canvas" width="1200" height="600" class="canvas"></canvas>
-        
-        <!-- Original Canvas entity, only used for non-oCanvas fractal function. This is being kept for Demo purposes. -->
-        <!-- <script>                                                            
-            const canvas = document.getElementById("canvas");
-            const ctx = canvas.getContext("2d");
-        </script> -->
 
-        <!-- initiate oCanvas -->
+        <!-- create oCanvas instance -->
         <script>
             var canvas = oCanvas.create({
             canvas: "canvas",
             background: '#fff',
             fps: 60
             });
+
+            var state = true;                       // global button state
         </script>
 
         <!-- drop down menu for choosing shapes -->
@@ -33,7 +29,7 @@
             <label for="shapeDropDown">Choose a shape:</label>
             <select name="shapeDropDown" id="shape-drop-down" onchange="getSelectShape(this);">
                 <option value="selector">Please select a shape</option>
-                <option value="square">square</option>
+                <option value="rectangle">rectangle</option>
                 <option value="circle">circle</option>
                 <option value="line">line</option>
                 <option value="polygon">polygon</option>
@@ -62,12 +58,13 @@
             <input type='text' class='text' name='iter-settings' id='iter-input' size='3' value="5"/>
         </form>
 
+        <!-- flower fractal options checkbox -->
         <form id='random-check'>
             <label for="random-check"> Random Flower? </label>
-            <input type='checkbox' id='check' name='random-check'/>
+            <input type='checkbox' id='check' name='random-check' onclick="getFlowerMenu(this);" checked/>
         </form>
 
-
+        <!-- flower fractal parameter settings -->
         <form id="flower-settings">
             <label for="leaf-range">Leaf size: </label>
             <input type='range' id='petal' name='leaf-range' min="1" max="50"/>
@@ -79,7 +76,7 @@
             <input type='range' id='angle' name='leaf-angle' min="1" max="100"/>
         </form>
 
-        <!-- drop down menu for choosing shape types -->
+        <!-- drop down menu for choosing fractal type -->
         <form>
             <label for="fractalDropDown" id="fractal-label">Choose a fractal: </label>
             <select name="fractalDropDown" id="fractal-menu" onchange="getFractName(this);">
@@ -89,13 +86,12 @@
             </select>
         </form>
 
-        <!-- Buttons -->
+        <!-- buttons -->
         <button class="button1"> Draw Fractals </button>
         <button class="button2"> Draw Shapes </button>
-        <button class="button3" onclick="flowerBind()"> Flower Test </button>
-        <!-- <button class="button4" onclick="addShape(spawnSquare(100,200,200,200))"> oCanvas Fractal Test </button> -->
+        <button class="button3" onclick=" exportCanvas();"> test </button>
 
-
+        <!-- scripts -->
         <script type="text/javascript" src="ocanvasInteractionObjects.js"> </script>
         <script type="text/javascript" src="fractalInteraction.js"> </script>
         <script type="text/javascript" src="flowerFractal.js"> </script>

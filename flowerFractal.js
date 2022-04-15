@@ -1,6 +1,17 @@
 let number = 0;
 let zNumber = 0;
 let random = Math.random();
+randomVals = true;
+
+
+function getFlowerMenu(status){
+    randomVals = status.checked;
+
+    $("#flower-settings").toggle();
+    console.log(randomVals);
+
+    return randomVals;
+}
 
 function downHandlerFlower(){
     selectedShape = document.getElementById("shape-drop-down").value;
@@ -10,14 +21,10 @@ function downHandlerFlower(){
         return;
     }
 
-    randomVals = document.getElementById('random-check').checked;
-
     if (randomVals === true){
-        petalSize = getRandomInt(1,50);
+        petalSize = getRandomInt(1,20);
         scale = getRandomInt(1,20);
-        petalAngle = getRandomInt(1,100) / 100;
-    } else {
-        $("#flower-settings").show();
+        petalAngle = getRandomInt(1,100)/100;
     }
 
     animateFlower()
@@ -39,13 +46,15 @@ function drawFlower(){
     positionY = radius * Math.cos(angle);
 
     if (number === 0){
-        parentShape = spawnCircle(600, 300, 100);
+        parentShape = spawnCircle(600, 300, petalSize);
         addShape(parentShape);
     }
 
     getShape();
 
     addShapeFlower(childShape);
+
+    freezeShapes(true); 
 
     number ++;
 }
@@ -86,7 +95,7 @@ function getShape(){
     getShapeAttributes();
 
     switch(shape) {
-        case "square":
+        case "rectangle":
             childShape = spawnSquare(positionX , positionY, petalSize, petalSize);
             childShape.fill = shapeColor;
             childShape.strokeWidth = strokeVar;
