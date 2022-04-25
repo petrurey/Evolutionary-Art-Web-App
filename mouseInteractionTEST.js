@@ -116,7 +116,6 @@ function interactiveDraw(){
 
 //button constant so it can be toggled as active
 const button3 = document.querySelector('.button2');
-var state = true;
     
 button3.addEventListener('click',() => {
     if (button1.classList.contains("active")){
