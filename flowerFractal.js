@@ -50,7 +50,7 @@ function drawFlower() {
 
   //first iteration spawns circle as parent regardless of selected flower shape
   if (number === 0) {
-    parentShape = spawnCircle(600, 300, petalSize);
+    parentShape = spawnCircle(600, 300, 10);
     addShape(parentShape);
   }
   //get shape selected by user
