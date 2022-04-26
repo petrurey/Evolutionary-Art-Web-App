@@ -95,6 +95,7 @@ function menuReset(){
 
 function freezeShapes(freezeState){
     var arrayLength = canvas.children.length;
+    var dragOptions = { changeZindex: true };
 
     if (freezeState === true){
         for (let i = 0; i < arrayLength ; i++){
@@ -116,7 +117,7 @@ function freezeShapes(freezeState){
     } else if (freezeState === false){
         for (let i = 0; i < arrayLength ; i++){
             var child = canvas.children[i];
-            child.dragAndDrop(true);
+            child.dragAndDrop(dragOptions);
 
             child.bind("mouseenter", function () {
                 canvas.mouse.cursor("pointer");

@@ -55,22 +55,3 @@ fractParent.addChild(fract);
 
 polyFract(startX + len, startY + len, polySides, len * 0.8, n-1);
 }
-
-function lineFract(startX, startY, endX, endY, n){
-fract = spawnLine(startX-x1, startY-y1, endX, endY);
-
-getShapeAttributes();
-
-fract.fill = shapeColor;
-fract.strokeWidth = strokeVar;
-fract.strokeColor = strokeCol;
-
-if(n==0){
-    return;
-}
-
-fractParent.addChild(fract);
-
-lineFract(startX + endX, startY + endY, endX + endX * 0.8, endY + endY * 0.8, n-1);
-
-}
