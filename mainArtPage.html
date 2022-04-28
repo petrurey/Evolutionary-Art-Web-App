@@ -17,7 +17,7 @@
         <script>
             var canvas = oCanvas.create({
             canvas: "canvas",
-            background: '#fff',
+            background: '',
             fps: 60
             });
 
@@ -64,6 +64,12 @@
             <input type='checkbox' id='check' name='random-check' onclick="getFlowerMenu(this);" checked/>
         </form>
 
+        <!-- canvas background -->
+        <form id='canvas-bg'>
+            <label for="canvas-bg"> Canvas Background </label>
+            <input type='color' id='canvas-bg' name='background-canvas' onchange="canvasBgColour(this)"/>
+        </form>
+
         <!-- flower fractal parameter settings -->
         <form id="flower-settings">
             <label for="leaf-range">Leaf size: </label>
@@ -89,13 +95,13 @@
         <!-- buttons -->
         <button class="button1"> Draw Fractals </button>
         <button class="button2"> Draw Shapes </button>
-        <button class="button3" onclick=" console.log(sym);"> test </button>
+        <button class="button3" onclick="exportCanvas();"> Export Canvas </button>
 
         <!-- scripts -->
-        <script type="text/javascript" src="ocanvasInteractionObjects.js"> </script>
+        <script type="text/javascript" src="shapeObjects.js"> </script>
         <script type="text/javascript" src="fractalInteraction.js"> </script>
         <script type="text/javascript" src="flowerFractal.js"> </script>
-        <script type="text/javascript" src="mouseInteractionTEST.js"> </script>
+        <script type="text/javascript" src="shapeInteraction.js"> </script>
         <script type="text/javascript" src="fractalFuncions.js"> </script>
     </body>
 

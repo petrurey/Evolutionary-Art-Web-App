@@ -7,31 +7,23 @@ function getShapeAttributes(){
     strokeCol = document.getElementById('stroke-color').value;
 };
 
-function calculateSquare(){
-    
-    if (x1 < x2 && y1 > y2){
+function calculateSquare() {
+  if (x1 < x2 && y1 > y2) {
+    var square = spawnSquare(x1, y1, l2, l1);
+    square.setOrigin("left", "bottom");
+  } else if (x1 < x2 && y1 < y2) {
+    var square = spawnSquare(x1, y1, l2, l1);
+  } else if (x1 > x2 && y1 < y2) {
+    var square = spawnSquare(x2, y2, l2, l1);
+    square.setOrigin("left", "bottom");
+  } else if (x1 > x2 && y1 > y2) {
+    var square = spawnSquare(x2, y2, l2, l1);
+  }
 
-        var square = spawnSquare(x1, y1, l2, l1);
-        square.setOrigin("left", "bottom");
-
-    } else if (x1 < x2 && y1 < y2){
-
-        var square = spawnSquare(x1, y1, l2, l1);
-
-    } else if (x1 > x2 && y1 < y2){
-
-        var square = spawnSquare(x2, y2, l2, l1);
-        square.setOrigin("left", "bottom");
-
-    } else if ( x1 > x2 && y1 > y2){
-    
-        var square = spawnSquare(x2, y2, l2, l1);
-    }
-
-    return square;
+  return square;
 }
 
-function coordinatePrint(){
+function getShape(){
     getCoordinates();
 
     l2 = Math.abs(l2);
@@ -98,7 +90,7 @@ function upHandlerShape(){
     x2 = canvas.mouse.x;
     y2 = canvas.mouse.y;
 
-    coordinatePrint();
+    getShape();
     freezeShapes(true);
 }
 
@@ -109,7 +101,7 @@ function downHandler(){
 }
 
 // makes mouseup & mousedown carry out the functionality described in upHandler & downHandler respectively
-function interactiveDraw(){
+function bindMouseShape(){
         canvas.bind("mousedown", downHandler);
         canvas.bind("mouseup", upHandlerShape);
 }
@@ -137,7 +129,7 @@ button3.addEventListener('click',() => {
         state = true;
     } else if (state == true){                                //falase state allows user to draw new shapes 
         $("#shape-settings").show();                      // show shape-lebel & shape-menu when drawing is engaged
-        interactiveDraw();
+        bindMouseShape();
         freezeShapes(state);     
         state = false;
     }
