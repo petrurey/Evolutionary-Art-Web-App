@@ -25,11 +25,11 @@ Main page where the web app is run. Contains the canvas, button and input boxes.
 
 Exploring having a main portfolio page that links to the web app. Work has not been pursued for this page and will eventually sit out of this specific project repository.
 
-### ⭐ mouseInterationTEST.js
+### ⭐ shapeInteractions.js
 
 All development regarding the improvement of user interaction with the app. This means moving away from buttons and text boxes and allowing the user to use the mouse to spawn shapes.
 
-### ⭐ ocanvasInteractionObjects.js
+### ⭐ shapeObjects.js
 
 The file containing the definitions for all the parent shape objects, functions on how to spawn them and interaction with the main HTML page.
 

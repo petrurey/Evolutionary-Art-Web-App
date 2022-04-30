@@ -3,6 +3,8 @@
     padding: 1;
     box-sizing: border-box;
 }
+
+
     #shape-settings{
         display: none;
         position: absolute;
