@@ -1,9 +1,7 @@
-/**
- * Fractal Button; this is the button that handles everything on the fractal creation side of the app.
- *
- * @state = global button state (pressed/unpressed)
- *
- */
+/* @author Petru Rey 
+*  @date 2 May 2022
+*/
+
 const button1 = document.querySelector(".button1");
 
 button1.addEventListener("click", () => {
@@ -14,42 +12,31 @@ button1.addEventListener("click", () => {
   }
   //use "active" css when button is clicked
   button1.classList.toggle("active");
-  //shape "undefined" for error catching during shape spawning
+  //shape set to "undefined" for error catching during shape spawning
   shape = undefined;
 
   if (state === false) {
-    //unbind any mouse actions
+  
     unbindFlower();
     unbindFract();
 
-    //unfreeze shapes so user can drag them
     freezeShapes(state);
-
-    //hide all labels
-    $("#fractal-label").hide();
-    $("#fractal-menu").hide();
-    $("#shape-settings").hide();
-    $("#shape-menu").hide();
-    $("#iter-label").hide();
-    $("#flower-settings").hide();
-    $("#random-check").hide();
-
-    //reset all menus
-    menuReset();
+    hideForms();
+    resetForms();
 
     //change button state
     state = true;
-  } else if (state === true) {
-    //freeze all shapes
+
+  } else {
+  
     freezeShapes(state);
 
-    //show relevant menus
-    $("#fractal-label").show();
-    $("#fractal-menu").show();
+    $("#fractal-settings").show();
 
     state = false;
   }
 });
+
 
 //binds mouse for shape fractal drawing
 function bindFract() {
@@ -67,41 +54,50 @@ function unbindFract() {
 function upHandlerFract() {
   x2 = canvas.mouse.x;
   y2 = canvas.mouse.y;
-  fractDraw();
+
+  drawFract();
+
   freezeShapes(true);
 }
 
-//shows & hides labels & inputs based on fractal-menu selected value
+//shows & hides forms based on fractal-menu selected value
 function getFractName(fract) {
   fract = fract.value;
 
-  $("#iter-label").hide();
+  $("#shape-settings-fract").hide();
+  $("#iter-menu").hide();
   $("#flower-settings").hide();
   $("#random-check").hide();
 
   if (fract === "selector") {
+
     unbindFlower();
     unbindFract();
+
   } else if (fract === "shape fractals") {
+
     unbindFlower();
     bindFract();
 
-    $("#shape-settings").show();
-    $("#iter-label").show();
+    $("#shape-settings-fract").show();
+
   } else if (fract === "trigonometric flower") {
+
     unbindFract();
     bindFlower();
 
     $("#shape-settings").show();
-    $("#iter-label").show();
     $("#random-check").show();
   }
+
+    $("#iter-menu").show();
+
   return fract;
 }
 
 //returns angle of rotation starting from x=0, clockwise, depending on quadrant
-function calculateAlpha() {
-  //gets user inputs first
+function calculateAlpha(){
+
   getCoordinates();
 
   //Quadrant 1
@@ -122,9 +118,9 @@ function calculateAlpha() {
   return alpha;
 }
 
-//draws shape fractals
-function fractDraw() {
-  //gets number of desired iterations
+//draws shape fractals based on selected shape
+function drawFract() {
+  
   iterN = Number(document.getElementById("iter-input").value);
 
   //limit iterations to 25 max
@@ -138,7 +134,7 @@ function fractDraw() {
   //spawn fractal based on input shape
   switch (shape) {
     case "rectangle":
-      fractParent = spawnSquare(x2, y2, l3, l3);
+      fractParent = spawnRect(x2, y2, l3, l3);
       fractParent.rotate(alpha);
       squareFract(x1, y1, l3, iterN);
       addShape(fractParent);
@@ -151,11 +147,6 @@ function fractDraw() {
       addShape(fractParent);
       break;
 
-    case "line":
-      window.alert("please return a valid shape");
-      console.log("please return a valid shape");
-      break;
-
     case "polygon":
       fractParent = spawnPoly(xmid, ymid, 3, l3 / 2);
       fractParent.rotate(alpha);
@@ -165,12 +156,10 @@ function fractDraw() {
 
     case undefined:
       window.alert("please return a shape");
-      console.log("please return a shape");
       break;
 
     default:
       window.alert("please return a shape");
-      console.log("please return a shape");
       break;
   }
 }

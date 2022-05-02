@@ -1,26 +1,21 @@
-//function used to calculate the length of the line in between the point there the mouse is clicked and the mouse is let go 
-// (in between mousedown and mouseup)
-function getShapeAttributes(){
-    shapeColor = document.getElementById('color').value;
-    strokeVar = Number(document.getElementById('stroke-width').value);
-    polySides = Number(document.getElementById('poly-sides').value);
-    strokeCol = document.getElementById('stroke-color').value;
-};
+/* @author Petru Rey 
+*  @date 2 May 2022
+*/
 
-function calculateSquare() {
+//spawn rectangle based on quadrant
+function calculateRect() {
   if (x1 < x2 && y1 > y2) {
-    var square = spawnSquare(x1, y1, l2, l1);
+    var square = spawnRect(x1, y1, l2, l1);
     square.setOrigin("left", "bottom");
   } else if (x1 < x2 && y1 < y2) {
-    var square = spawnSquare(x1, y1, l2, l1);
+    var square = spawnRect(x1, y1, l2, l1);
   } else if (x1 > x2 && y1 < y2) {
-    var square = spawnSquare(x2, y2, l2, l1);
+    var square = spawnRect(x2, y2, l2, l1);
     square.setOrigin("left", "bottom");
   } else if (x1 > x2 && y1 > y2) {
-    var square = spawnSquare(x2, y2, l2, l1);
+    var square = spawnRect(x2, y2, l2, l1);
   }
-
-  return square;
+  return rect;
 }
 
 function getShape(){
@@ -33,16 +28,16 @@ function getShape(){
 
     switch(shape) {
         case "rectangle":
-            square = calculateSquare();
+            rect = calculateRect();
 
             if(x1 === x2 || y1 === y2){
                 window.alert("please drag the mouse to create a rectangle");
                 return;
             }
 
-            square.fill = shapeColor;
-            square.strokeWidth = strokeVar;
-            square.strokeColor = strokeCol;
+            rect.fill = shapeColor;
+            rect.strokeWidth = strokeVar;
+            rect.strokeColor = strokeCol;
             addShape(square);
 
         break;
@@ -63,7 +58,6 @@ function getShape(){
         break;
 
         case "polygon":
-            console.log("poly selected");
             var poly = spawnPoly(xmid, ymid, 3, l3/2);
             poly.fill = shapeColor;
             poly.strokeWidth = strokeVar;
@@ -82,25 +76,18 @@ function getShape(){
             console.log("please return a shape");
         break;
     }
-    console.log(canvas.children);
 }
 
-// Handles the fetching of coordinates and printing of object once mouse is up
+// prints shape and freezez shapes at mouse-up
 function upHandlerShape(){
     x2 = canvas.mouse.x;
     y2 = canvas.mouse.y;
 
     getShape();
+
     freezeShapes(true);
 }
 
-// Handles the fetching of coordinates once mouse is down
-function downHandler(){
-    x1 = canvas.mouse.x;
-    y1 = canvas.mouse.y;
-}
-
-// makes mouseup & mousedown carry out the functionality described in upHandler & downHandler respectively
 function bindMouseShape(){
         canvas.bind("mousedown", downHandler);
         canvas.bind("mouseup", upHandlerShape);
@@ -118,19 +105,24 @@ button3.addEventListener('click',() => {
     button3.classList.toggle('active');
     shape = undefined;
 
-    if (state == false){                                 //true state unbinds the mouseup & mousedown and allows user to stop drawing
-        canvas.unbind("mousedown", downHandler);        //and go back to dragging / manipulation of current shapes
-        canvas.unbind("mouseup", upHandlerShape);
-        $("#shape-settings").hide(); 
-        $("#shape-menu").hide();  
-        console.log("unclicked")                    
-        menuReset();
+    if (state == false){                               
+        canvas.unbind("mousedown", downHandler);      
+        canvas.unbind("mouseup", upHandlerShape); 
+
+        hideForms();
+        resetForms();
+
         freezeShapes(state);
+
         state = true;
-    } else if (state == true){                                //falase state allows user to draw new shapes 
-        $("#shape-settings").show();                      // show shape-lebel & shape-menu when drawing is engaged
+    } else if (state == true){       
+
+        $("#shape-settings").show();    
+
         bindMouseShape();
-        freezeShapes(state);     
+
+        freezeShapes(state);   
+          
         state = false;
     }
 });

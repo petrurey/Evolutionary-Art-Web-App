@@ -1,3 +1,4 @@
+<!-- author Petru Rey, date 2 May 2022 -->
 <!DOCTYPE html>
 <html lang=english>
     <head>
@@ -5,16 +6,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <link rel="stylesheet" href="./styleArtPage.css" />
-        <title>EvoArt</title>
+        <title>EAP</title>
         <script language="JavaScript" type="text/javascript" src="/Users/petrurey/Documents/JS_packages/jquery-3.6.0.js"></script>
         <script language="JavaScript" type="text/javascript" src="/Users/petrurey/Documents/JS_packages/ocanvas-2.10.0.js"></script>
     </head>
     <body>
         <!-- initiating canvas  -->
-        <div id = canvas-container >
-        <canvas id="canvas" width="1200" height="600" class="canvas"></canvas>
-            <div class = rel><p>test</p></div>
-        </div>
+        <canvas id="canvas" width="1500" height="600" class="canvas"></canvas>
 
         <!-- create oCanvas instance -->
         <script>
@@ -24,10 +22,11 @@
             fps: 60
             });
 
-            var state = true;                       // global button state
+            // global button state for both shape and fractal buttons
+            var state = true;
         </script>
 
-        <!-- drop down menu for choosing shapes -->
+        <!-- forms for choosing shapes or fractal-shapes-->
         <form id="shape-settings">
             <label for="shapeDropDown">Choose a shape:</label>
             <select name="shapeDropDown" id="shape-drop-down" onchange="getSelectShape(this);">
@@ -39,54 +38,73 @@
             </select>
         </form>
 
+        <form id="shape-settings-fract">
+            <label for="fractDropDown">Choose a shape:</label>
+            <select name="fractDropDown" id="fract-drop-down" onchange="getSelectShape(this);">
+                <option value="selector">Please select a shape</option>
+                <option value="rectangle">rectangle</option>
+                <option value="circle">circle</option>
+                <option value="polygon">polygon</option>
+            </select>
+        </form>
+
+        <div class="shared-attributes">
         <!-- input fields for shape attributes -->
-        <form id="shape-menu">
-            <label for="shapeDropDown" class="shape-label-color">Shape fill color (name / hex):</label>
-            <input type="color" name="color" id="color" class="shape-menu-color">
+            <form id="shape-menu">
+                <label for="shapeDropDown" class="shape-label-color">Shape fill colour: </label>
+                <input type="color" name="color" id="color" class="shape-menu-color">
 
-            <label for="shapeDropDown" class="shape-label-stroke">Shape stroke (px)<br> & color:</label>
-            <input type="text" name="stroke-width" id="stroke-width" class="shape-menu-stroke-width">
-            <input type="color" name="stroke-color" id="stroke-color" class="shape-menu-stroke-color">
-        </form>
+                <label for="shapeDropDown" class="shape-label-stroke">Shape colour & stroke: </label>
+                <input type="number" name="stroke-width" id="stroke-width" class="shape-menu-stroke-width" min="0" size="5">
+                <input type="color" name="stroke-color" id="stroke-color" class="shape-menu-stroke-color">
+            </form>
 
-        <!-- input for polygon sides -->
-        <form id="poly-settings">
-            <label for="poly-settings">Number of sides: </label>
-            <input type='text' class='text' name='poly-settings' id='poly-sides' value size='20'/>
-        </form>
+            <!-- input for polygon sides -->
+            <form id="poly-menu">
+                <label for="poly-settings">Number of sides: </label>
+                <input type='number' name='poly-settings' id='poly-sides' size='2' value='3' min="3" onKeyDown="return false"/>
+            </form>
+         </div>
 
         <!-- input for number of fractal iterations -->
-        <form id="iter-label">
-            <label for="iter-label">Number of Iterations: </label>
-            <input type='text' class='text' name='iter-settings' id='iter-input' size='3' value="5"/>
+        <form id="iter-menu">
+            <label for="iter-settings">Number of Iterations: </label>
+            <input type='number' name='iter-settings' id='iter-input' size='3' value="5"/>
         </form>
 
-        <!-- flower fractal options checkbox -->
-        <form id='random-check'>
-            <label for="random-check"> Random Flower? </label>
-            <input type='checkbox' id='check' name='random-check' onclick="getFlowerMenu(this);" checked/>
-        </form>
+        <!-- canvas background settings -->
+        <div class = canvas-settings>
+            <form id='canvas-colour'>
+                <label for="canvas-bg"> Canvas Background </label>
+                <input type='color' id='canvas-bg' name='background-canvas' onchange="canvasBgColour(this)"/>
+            </form>
+        </div>
 
-        <!-- canvas background -->
-        <form id='canvas-bg'>
-            <label for="canvas-bg"> Canvas Background </label>
-            <input type='color' id='canvas-bg' name='background-canvas' onchange="canvasBgColour(this)"/>
-        </form>
+        <div class="flower-attributes">
 
-        <!-- flower fractal parameter settings -->
-        <form id="flower-settings">
-            <label for="leaf-range">Leaf size: </label>
-            <input type='range' id='petal' name='leaf-range' min="1" max="50"/>
-                <br>
-            <label for="scale-range">Scale size: </label>
-            <input type='range' id='scale' name='scale-range' min="1" max="20"/>
-                <br>
-            <label for="leaf-angle">Leaf angle: </label>
-            <input type='range' id='angle' name='leaf-angle' min="1" max="100"/>
-        </form>
+            <!-- flower fractal options checkbox -->
+            <form id='random-check'>
+                <label for="random-check"> Random Flower? </label>
+                <input type='checkbox' id='check' name='random-check' onclick="getFlowerMenu(this);" checked/>
+            </form>
+
+            <!-- flower fractal parameter settings -->
+            <form id="flower-settings">
+                <label for="leaf-range">Leaf size: </label>
+                <input type='range' id='petal' name='leaf-range' min="1" max="50"/>
+                    <br>
+                <label for="scale-range">Scale size: </label>
+                <input type='range' id='scale' name='scale-range' min="1" max="20"/>
+                    <br>
+                <label for="leaf-angle">Leaf angle: </label>
+                <input type='range' id='angle' name='leaf-angle' min="1" max="100"/>
+            </form>
+
+        </div>
+
 
         <!-- drop down menu for choosing fractal type -->
-        <form>
+        <form id = fractal-settings>
             <label for="fractalDropDown" id="fractal-label">Choose a fractal: </label>
             <select name="fractalDropDown" id="fractal-menu" onchange="getFractName(this);">
                 <option value="selector">Please select a fractal type</option>
@@ -101,7 +119,7 @@
         <button class="button3" onclick="exportCanvas();"> Export Canvas </button>
 
         <!-- scripts -->
-        <script type="text/javascript" src="shapeObjects.js"> </script>
+        <script type="text/javascript" src="sharedObjects.js"> </script>
         <script type="text/javascript" src="fractalInteraction.js"> </script>
         <script type="text/javascript" src="flowerFractal.js"> </script>
         <script type="text/javascript" src="shapeInteraction.js"> </script>

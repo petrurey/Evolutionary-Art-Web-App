@@ -1,15 +1,59 @@
+/* @author Petru Rey 
+*  @date 2 May 2022
+*/
+
 *{
     margin: 1;
     padding: 1;
     box-sizing: border-box;
-}
+}   
 
+    .canvas-settings{
+        position: absolute;
+        top: 95%;
+        left: 70%;
+    }
 
-    #shape-settings{
+    #iter-menu{
         display: none;
         position: absolute;
-        top: 630px;
-        left: 350px;
+        top: 81%;
+        left:13%;
+    }
+
+    .flower-attributes{
+        position: absolute;
+        left: 13%;
+        top: 84%;
+    }
+
+    #random-check{
+        display: none;
+        position: relative;
+    }
+
+    #flower-settings{
+        display: none;
+        position: relative;
+    }
+
+    #fractal-settings{
+        display: none;
+        position: absolute;
+        top: 95%;
+    }
+
+    #canvas {
+        max-height: 80%;
+        position: absolute;
+        border: 2px solid black;
+    } 
+
+    .shared-attributes{
+        position: absolute;
+        top: 80%;
+        left: 35%;
+        width: 5cm;
     }
 
     #shape-menu{
@@ -17,17 +61,45 @@
         position: absolute;
     }
 
-    #canvas {
-        width: 100%;
-        max-height: 80%;
-        position: absolute;
-        border: 2px solid black;
-    } 
+    .shape-label-color{
+        position: relative;
+        top: 20px;
+    }
 
-    #canvas-bg{
+    .shape-menu-color{
+        position: relative;
+        left: 10%;
+        top: 20px;
+    }
+
+    .shape-label-stroke{
+        position: relative;
+        top: 30px;
+    }
+
+    .shape-menu-stroke-width{
+        position: relative;
+        top: 35px;
+        left: 55%;
+    }
+
+    .shape-menu-stroke-color{
+        position: relative;
+        top: 10px;
+    }
+
+    #shape-settings{
+        display: none;
         position: absolute;
-        top: 630px;
-        left: 1000px;
+        top: 80%;
+        left: 50%;
+    }
+
+    #shape-settings-fract{
+        display: none;
+        position: absolute;
+        top: 85%;
+        left: 13%;
     }
 
     #line-settings{
@@ -37,87 +109,13 @@
         left: 1000px;
     }
 
-    #poly-settings{
+    #poly-menu{
         display: none;
-        position: absolute;
-        top: 700px;;
-        left: 1020px;
+        position: relative;
+        top: 60px;
+        left: 150%;
     }
 
-    #fractal-menu{
-        display: none;
-        position: absolute;
-        top: 630px;
-        left: 165px;
-    }
-
-    #fractal-label{
-        display: none;
-        position: absolute;
-        top: 630px;
-        left: 50px;
-    }
-
-    #iter-label{
-        display: none;
-        position: absolute;
-        top: 670px;;
-        left: 100px;
-    }
-
-    #stroke-width{
-        top: 625px;;
-        left: 1100px;
-    }
-
-    #stroke-color{
-        top: 625px;;
-        left: 1250px;
-    }
-
-    #random-check{
-        display: none;
-        position: absolute;
-        top: 700px;;
-        left: 100px;
-    }
-
-    #flower-settings{
-        display: none;
-        position: absolute;
-        top: 750px;;
-        left: 100px;
-    }
-
-    .shape-label-color{
-        position: absolute;
-        top: 630px;;
-        left: 650px;
-    }
-
-    .shape-menu-color{
-        position: absolute;
-        top: 630px;;
-        left: 850px;
-    }
-
-    .shape-label-stroke{
-        position: absolute;
-        top: 630px;;
-        left: 1020px;
-    }
-
-    .shape-menu-stroke-width{
-        position: absolute;
-        top: 635px;;
-        left: 1140px;
-    }
-
-    .shape-menu-stroke-color{
-        position: absolute;
-        top: 635px;;
-        left: 1300px;
-    }
 
     .shape-label-circle-settings{
         position: absolute;
@@ -130,7 +128,7 @@
         padding: 30px;
         position: absolute;
         z-index: 2;   
-        top: 700px;       
+        top: 80%;       
     }
 
     button:hover{
@@ -151,7 +149,7 @@
     }
 
     .button2 {
-        left: 700px;
+        left: 70%;
         box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
         cursor: pointer;
     }
@@ -165,5 +163,5 @@
     }
 
     .button3 {
-        left: 870px;
+        left: 80%;
     }

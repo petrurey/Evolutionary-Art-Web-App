@@ -1,3 +1,7 @@
+/* @author Petru Rey 
+*  @date 2 May 2022
+*/
+
 //keeps track of iterations & used in @drawFlower() calculations
 let number = 0;
 // keeps track of individual petal z value (where it sits below/above other petals)
@@ -19,19 +23,21 @@ function unbindFlower() {
   canvas.unbind("dblclick", downHandlerFlower);
 }
 
+//adds each petal below previously spaned petal
 function addFlowerChild(shape) {
   parentShape.addChildAt(shape, zNumber);
   zNumber -= 1;
 }
 
 function downHandlerFlower() {
-  //gets selected shape and catches errors
   selectedShape = document.getElementById("shape-drop-down").value;
+
   if (selectedShape === "selector") {
     window.alert("please return a shape");
     console.log("please return a shape");
     return;
   }
+
   //randomizez values, outside of recursion, if selected
   if (randomVals === true) {
     petalSize = getRandomInt(1, 20);
@@ -53,13 +59,11 @@ function drawFlower() {
     parentShape = spawnCircle(600, 300, 10);
     addShape(parentShape);
   }
-  //get shape selected by user
-  getFlowerShape();
+  
+  getPetalShape();
 
-  //add shape as child to circle parent
   addFlowerChild(childShape);
 
-  //freeze all shapes so user can not drag shapes during animation
   freezeShapes(true);
 
   number++;
@@ -93,13 +97,13 @@ function animateFlower() {
   requestAnimationFrame(animateFlower);
 }
 
-//spawn shape based on users selection with desired user attributes
-function getFlowerShape() {
+
+function getPetalShape() {
   getShapeAttributes();
 
   switch (shape) {
     case "rectangle":
-      childShape = spawnSquare(positionX, positionY, petalSize, petalSize);
+      childShape = spawnRect(positionX, positionY, petalSize, petalSize);
       childShape.fill = shapeColor;
       childShape.strokeWidth = strokeVar;
       childShape.strokeColor = strokeCol;
@@ -120,7 +124,7 @@ function getFlowerShape() {
         positionY - petalSize
       );
       childShape.strokeWidth = strokeVar;
-      childShape.strokeColor = strokeCol;
+      childShape.strokeColor = shapeColor;
       break;
 
     case "polygon":
