@@ -124,31 +124,19 @@ function getCoordinates() {
   ymid = (y1 + y2) / 2;
 }
 
-//copied from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
-function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
-}
-
-// https://stackoverflow.com/questions/923885/capture-html-canvas-as-gif-jpg-png-pdf
 function exportCanvas() {
-  var canvasElement = document.getElementById("canvas");
-
+  var canvas = document.getElementById("canvas");
   var fileType = "image/png";
+  var URL = canvas.toDataURL("image/png");
+  var link = document.createElement("a");
 
-  var imgURL = canvasElement.toDataURL("image/png");
+  link.download = "downloadImg";
+  link.href = URL;
+  link.dataset.downloadurl = [fileType, link.download, link.href].join( ":" );
 
-  var dlLink = document.createElement("a");
-  dlLink.download = "downloadImg";
-  dlLink.href = imgURL;
-  dlLink.dataset.downloadurl = [fileType, dlLink.download, dlLink.href].join(
-    ":"
-  );
-
-  document.body.appendChild(dlLink);
-  dlLink.click();
-  document.body.removeChild(dlLink);
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
 }
 
 function canvasBgColour(colour) {
@@ -179,3 +167,10 @@ function getShapeAttributes() {
   polySides = Number(document.getElementById("poly-sides").value);
   strokeCol = document.getElementById("stroke-color").value;
 }
+
+//copied from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min);
+  }
