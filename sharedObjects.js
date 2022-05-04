@@ -91,11 +91,10 @@ function freezeShapes(freezeState) {
     for (let i = 0; i < arrayLength; i++) {
       var child = canvas.children[i];
 
-      child
-        .bind("mouseenter", function () {
+      child.bind("mouseenter", function () {
           canvas.mouse.cursor("default");
         })
-        .bind("mouseleave", function () {
+        child.bind("mouseleave", function () {
           canvas.mouse.cursor("default");
         });
 
@@ -107,13 +106,23 @@ function freezeShapes(freezeState) {
     for (let i = 0; i < arrayLength; i++) {
       var child = canvas.children[i];
       child.dragAndDrop(dragOptions);
-
+    
       child.bind("mouseenter", function () {
         canvas.mouse.cursor("pointer");
+
+        // canvas.bind("dblclick", function() {
+        //   canvas.removeChild(child);
+        // });
+
       });
     }
   }
 }
+  
+  function undoDrawing(){
+    var lastChildIndex = canvas.children.length - 1;
+    canvas.removeChildAt(lastChildIndex);
+  }
 
 //calculate and store coordinates relevant to shape spawning
 function getCoordinates() {

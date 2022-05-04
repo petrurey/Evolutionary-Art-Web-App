@@ -5,15 +5,15 @@
 //spawn rectangle based on quadrant
 function calculateRect() {
   if (x1 < x2 && y1 > y2) {
-    var square = spawnRect(x1, y1, l2, l1);
-    square.setOrigin("left", "bottom");
+    var rect = spawnRect(x1, y1, l2, l1);
+    rect.setOrigin("left", "bottom");
   } else if (x1 < x2 && y1 < y2) {
-    var square = spawnRect(x1, y1, l2, l1);
+    var rect = spawnRect(x1, y1, l2, l1);
   } else if (x1 > x2 && y1 < y2) {
-    var square = spawnRect(x2, y2, l2, l1);
-    square.setOrigin("left", "bottom");
+    var rect = spawnRect(x2, y2, l2, l1);
+    rect.setOrigin("left", "bottom");
   } else if (x1 > x2 && y1 > y2) {
-    var square = spawnRect(x2, y2, l2, l1);
+    var rect = spawnRect(x2, y2, l2, l1);
   }
   return rect;
 }
@@ -38,7 +38,7 @@ function getShape(){
             rect.fill = shapeColor;
             rect.strokeWidth = strokeVar;
             rect.strokeColor = strokeCol;
-            addShape(square);
+            addShape(rect);
 
         break;
 
